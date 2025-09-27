@@ -8,18 +8,16 @@ const App = () => {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    if (query === "") {
-      setSuggestions([]);
-      return;
-    }
-
-    // simulate async API call with setTimeout
     const handler = setTimeout(() => {
-      const filtered = fruits.filter((fruit) =>
-        fruit.toLowerCase().startsWith(query.toLowerCase())
-      );
-      setSuggestions(filtered);
-    }, 300); // delay for async effect
+      if (query === "") {
+        setSuggestions([]);
+      } else {
+        const filtered = fruits.filter((fruit) =>
+          fruit.toLowerCase().startsWith(query.toLowerCase())
+        );
+        setSuggestions(filtered);
+      }
+    }, 300);
 
     return () => clearTimeout(handler);
   }, [query]);
@@ -35,13 +33,14 @@ const App = () => {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      {suggestions.length > 0 && (
-        <ul>
-          {suggestions.map((fruit, index) => (
-            <li key={index}>{fruit}</li>
-          ))}
-        </ul>
-      )}
+      {/* हमेशा <ul> रहेगा */}
+      <ul>
+        {suggestions.length > 0 ? (
+          suggestions.map((fruit, index) => <li key={index}>{fruit}</li>)
+        ) : (
+          <li>No suggestions</li> // invalid data case
+        )}
+      </ul>
     </div>
   );
 };
