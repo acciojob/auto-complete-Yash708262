@@ -33,16 +33,15 @@ const App = () => {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      {/* हमेशा <ul> रहेगा */}
+      {/* ul हमेशा present रहेगा */}
       <ul>
-        {suggestions.length > 0 ? (
-          suggestions.map((fruit, index) => <li key={index}>{fruit}</li>)
-        ) : (
-          <li>No suggestions</li> // invalid data case
-        )}
+        {suggestions.map((fruit, index) => (
+          <li key={index}>{fruit}</li>
+        ))}
       </ul>
     </div>
   );
 };
 
 export default App;
+
